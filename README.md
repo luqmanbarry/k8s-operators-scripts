@@ -31,7 +31,9 @@ pipeline {
         disableConcurrentBuilds()
         disableResume()
     }
+
     [....]
+    
 }
 ```
 
