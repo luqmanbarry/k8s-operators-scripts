@@ -62,11 +62,11 @@ oc delete $CSV_NAME
 remove_finalizers "$CSV_NAME"
 
 echo "Deleting $OPERATOR_NAME operator Install Plans..."
-for IP in $(oc get installplan | grep $OPERATOR_NAME | cut -d' ' -f 1); 
+for IP in $(oc get installplan.operators.coreos.com | grep $OPERATOR_NAME | cut -d' ' -f 1); 
 do 
     echo "===> Deleting InstallPlan: \"$IP\""; 
-    oc delete installplan/$IP || true;
-    remove_finalizers "installplan/$IP"
+    oc delete installplan.operators.coreos.com/$IP || true;
+    remove_finalizers "installplan.operators.coreos.com/$IP"
 done
 
 echo "Deleting Helm Hooks Job..."
