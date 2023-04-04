@@ -7,7 +7,7 @@ pipeline {
 
     parameters {
         string(name: 'OCPCredentialsId', defaultValue: 'ocp-sa-token', description: 'Token used by the OpenShift CLI to authenticate.', trim: true)
-        choice(name: 'Action', choices: ['PATCH_CRs', 'INSTALL_OPERATOR', 'UNINSTALL_OPERATOR', 'APPROVE_INSTALLPLAN', 'ALL'], description: 'List of actions to take. \nPATCH_CRs: Choose this option for simply patching the Operator custom resources.\nINSTALL_OPERATOR: Choose this option for first time installation.\nUNINSTALL_OPERATOR: Choose this option for removing the operator and all its child resources; you need cluster-admin to delete the CRDs.\nAPPROVE_INSTALLPLAN: Choose this option to approve an InstallPlan; ensure the installPlan exist in the cluster prior.\n"ALL": Chose this option to execute all the stages in the Pipeline.')
+        choice(name: 'Action', choices: ['PATCH_CR', 'INSTALL_OPERATOR', 'UNINSTALL_OPERATOR', 'APPROVE_INSTALLPLAN', 'ALL'], description: 'List of actions to take. \nPATCH_CR: Choose this option for simply patching the Operator custom resources.\nINSTALL_OPERATOR: Choose this option for first time installation.\nUNINSTALL_OPERATOR: Choose this option for removing the operator and all its child resources; you need cluster-admin to delete the CRDs.\nAPPROVE_INSTALLPLAN: Choose this option to approve an InstallPlan; ensure the installPlan exist in the cluster prior.\n"ALL": Chose this option to execute all the stages in the Pipeline.')
         string(name: 'TargetNamespace', defaultValue: 'my-namespace', description: 'The target namespace to deploy the monitoring resources.', trim: true)
         string(name: 'OperatorName', defaultValue: 'amq-broker-rhel8', description: 'The operator name according to docs.', trim: true)
         string(name: 'StartingCSV', defaultValue: 'amq-broker-operator.v7.10', description: 'The operator version or startingCSV.', trim: true)
@@ -124,10 +124,10 @@ pipeline {
                 }
             }
         }
-        stage("Patch CRs CRs"){
+        stage("Patch Custom Resources"){
             when {
                 anyOf {
-                    environment name: 'Action', value: 'PATCH_CR_CRs'
+                    environment name: 'Action', value: 'PATCH_CR'
                     environment name: 'Action', value: 'ALL'
                 }
             }
@@ -155,7 +155,7 @@ pipeline {
         stage("Verify Installation") {
             when {
                 anyOf {
-                    environment name: 'Action', value: 'PATCH_CR_CRs'
+                    environment name: 'Action', value: 'PATCH_CR'
                     environment name: 'Action', value: 'ALL'
                 }
             }
