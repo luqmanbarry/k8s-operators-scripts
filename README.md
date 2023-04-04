@@ -2,6 +2,10 @@
 
 Examples of how to run the scripts. They make certain assumptions; I suggest you read the scripts to understand them, ensure they are met when installing the Operator. Helm is one recommended approach to packaging Operators and their custom resources (CRs) templates.
 
+## Sample CI/CD Jenkins Job
+
+[Follow this link](./Jenkinsfile)
+
 ## Approve Operator InstallPlan
 
 ```sh
