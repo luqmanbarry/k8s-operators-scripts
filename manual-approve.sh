@@ -33,6 +33,10 @@ function approve_installplan() {
     oc replace -f ${TRIMMED_INSTALLPLAN}
 
     oc patch installplan.operators.coreos.com $INSTALLPLAN_NAME --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
+
+    rm -v ${ORIGIN_INSTALLPLAN}
+    rm -v ${OWNER_REF_TRIMMED}
+    rm -v ${TRIMMED_INSTALLPLAN}
 }
 
 if [ -z $NAMESPACE ];
