@@ -101,7 +101,7 @@ do
     remove_finalizers "configmap/$CM"
 done
 
-echo "Deletin ConfigMaps..."
+echo "Deletin Secrets..."
 for SEC in $(oc get secret | grep $OPERATOR_NAME | cut -d' ' -f 1); 
 do 
     echo "===> Deleting Secret: \"$SEC\""; 

@@ -96,7 +96,9 @@ pipeline {
             steps {
                 retry(3) {
                     sh '''
-                        oc delete installplan.operators.coreos.com --all
+                        oc delete subscription.operators.coreos.com --all
+                        oc delete InstallPlan --all
+                        
                         helm upgrade --install ${OPERATOR_CHART_NAME} ./operator-resources \
                             --set chart.names="${OPERATOR_CHART_NAME}\\,${CR_CHART_NAME}" \
                             -f ${OPERATOR_VALUES_FILE} \
