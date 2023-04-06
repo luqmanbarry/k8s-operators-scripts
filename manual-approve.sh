@@ -4,14 +4,9 @@ echo "*************************************************************"
 echo "* The script uses tags/labels to list and delete resources. *"
 echo "* Ensure operator yaml manifests have cosistent labels set. *"
 echo "* Feel free to adapt the script to your needs.              *"
-echo "************************************************************"
+echo "*************************************************************"
 
-set +e
-
-NAMESPACE=$1
-OPERATOR_NAME=$2
-
-function approve_installplan() {
+approve_installplan () {
     INSTALLPLAN_NAME=$1
     DESIRED_OPERATOR=$2
     DESIRED_CSV=$3
@@ -36,12 +31,18 @@ function approve_installplan() {
 
     sleep 60
 
-    oc deleete installplan.operators.coreos.com $INSTALLPLAN_NAME
+    oc delete installplan.operators.coreos.com $INSTALLPLAN_NAME
 
     rm -v ${ORIGIN_INSTALLPLAN}
     rm -v ${OWNER_REF_TRIMMED}
     rm -v ${TRIMMED_INSTALLPLAN}
 }
+
+set +e
+
+NAMESPACE=$1
+OPERATOR_NAME=$2
+
 
 if [ -z $NAMESPACE ];
 then
@@ -78,7 +79,10 @@ do
     for installplan in $installplans
     do
         echo "Procesing InstallPlan: \"$installplan\""
-        if [ "`oc get installplan.operators.coreos.com $installplan -o jsonpath="{.spec.approved}"`" == "false" ]; then
+        IP_APPROVED="$(oc get installplan.operators.coreos.com $installplan -o jsonpath='{.spec.approved}')"
+        echo "Install Plan Approve? $IP_APPROVED"
+        
+        if [ !$IP_APPROVED  ]; then
             echo "Approving Subscription $subscription with install plan $installplan"
 
             approve_installplan $installplan $OPERATOR_NAME $desiredcsv
@@ -90,4 +94,3 @@ do
 done
 
 set -e
-         
