@@ -30,9 +30,13 @@ function approve_installplan() {
         'del(.spec.clusterServiceVersionNames[] | select(. | index($CSV_NAME) | not))' ${OWNER_REF_TRIMMED} > ${TRIMMED_INSTALLPLAN}
 
     echo "Replacing InstallPlan by trimmed version"
-    oc replace -f ${TRIMMED_INSTALLPLAN}
+    oc apply -f ${TRIMMED_INSTALLPLAN}
 
     oc patch installplan.operators.coreos.com $INSTALLPLAN_NAME --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
+
+    sleep 60
+
+    oc deleete installplan.operators.coreos.com $INSTALLPLAN_NAME
 
     rm -v ${ORIGIN_INSTALLPLAN}
     rm -v ${OWNER_REF_TRIMMED}
