@@ -14,6 +14,8 @@ approve_installplan () {
     ORIGIN_INSTALLPLAN=/tmp/originInstallplan.json
     OWNER_REF_TRIMMED=/tmp/ownerRefInstallPlan.json
     TRIMMED_INSTALLPLAN=/tmp/trimmedInstallPlan.json
+    DESIRED_CSV_OUTPUT=/tmp/desiredCSVOutput.json
+
 
     oc get installplan.operators.coreos.com/$INSTALLPLAN_NAME -ojson > ${ORIGIN_INSTALLPLAN}
     echo "Trimming down .metadata.ownerReferences[]"
@@ -28,10 +30,19 @@ approve_installplan () {
     oc apply -f ${TRIMMED_INSTALLPLAN}
 
     oc patch installplan.operators.coreos.com $INSTALLPLAN_NAME --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
+    
+    while [ true ];
+    do
+        echo "Awaiting Operator Installation to succeed..."
+        sleep 15
+        OPERATOR_INSTALLED=$( oc get clusterserviceversion.operators.coreos.com/$DESIRED_CSV -ojson | jq '.status | select( .phase == "Succeeded" ) | has("reason")' )
 
-    sleep 60
-
-    oc delete installplan.operators.coreos.com $INSTALLPLAN_NAME
+        if [ $OPERATOR_INSTALLED ];
+        then
+            oc delete installplan.operators.coreos.com $INSTALLPLAN_NAME
+            break;
+        fi
+    done
 
     rm -v ${ORIGIN_INSTALLPLAN}
     rm -v ${OWNER_REF_TRIMMED}
