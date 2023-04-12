@@ -29,6 +29,12 @@ approve_installplan () {
     echo "Replacing InstallPlan by trimmed version"
     oc apply -f ${TRIMMED_INSTALLPLAN}
 
+    if [ $? != 0 ];
+    then
+        echo "##### Failed to patch installplan: $INSTALLPLAN_NAME"
+        exit 1
+    fi
+
     oc patch installplan.operators.coreos.com $INSTALLPLAN_NAME --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
     
     while [ true ];
