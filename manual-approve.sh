@@ -37,6 +37,8 @@ approve_installplan () {
 
     oc patch installplan.operators.coreos.com $INSTALLPLAN_NAME --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
     
+    START_TIME=$(date +%s)
+    MAX_WAIT_SECS=300
     while [ true ];
     do
         sleep 15
@@ -48,9 +50,19 @@ approve_installplan () {
             echo ">>> Operator installation successful. >>>"
             oc delete installplan.operators.coreos.com $INSTALLPLAN_NAME
             break;
-        elif [ $OPERATOR_INSTALLED = "Installing" ];
+        elif [ $OPERATOR_INSTALLED = "Installing" ] || [ $OPERATOR_INSTALLED = "InstallReady" ];
         then
             echo ">>> Operator installation 'in progress'.>>>"
+        elif [ $OPERATOR_INSTALLED = "Pending" ];
+        then
+            echo ">>> Operator installation 'Pending'.>>>"
+            sleep 15
+            TIME_ELAPSED=$($(date +%s)-$START_TIME)
+            if [ $TIME_ELAPSED >= $MAX_WAIT_SECS ];
+            then
+                echo ">>> Operator stuck in 'Pending' for the last $MAX_WAIT_SECS seconds. May be failing to install.>>>"
+                exit 1
+            fi
         else
             echo ">>> Operator installation failed. >>>"
             exit 1
