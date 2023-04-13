@@ -39,14 +39,21 @@ approve_installplan () {
     
     while [ true ];
     do
-        echo "Awaiting Operator Installation to succeed..."
         sleep 15
-        OPERATOR_INSTALLED=$( oc get clusterserviceversion.operators.coreos.com/$DESIRED_CSV -ojson | jq '.status | select( .phase == "Succeeded" ) | has("reason")' )
-
-        if [ $OPERATOR_INSTALLED ];
+        OPERATOR_INSTALLED="$( oc get clusterserviceversion.operators.coreos.com/$DESIRED_CSV -ojson | jq '.status.phase' | xargs )"
+        echo "Awaiting Operator Installation to succeed..."
+        echo "CSV PHASE: $OPERATOR_INSTALLED"
+        if [ $OPERATOR_INSTALLED = "Succeeded" ];
         then
+            echo ">>> Operator installation successful. >>>"
             oc delete installplan.operators.coreos.com $INSTALLPLAN_NAME
             break;
+        elif [ $OPERATOR_INSTALLED = "Installing" ];
+        then
+            echo ">>> Operator installation 'in progress'.>>>"
+        else
+            echo ">>> Operator installation failed. >>>"
+            exit 1
         fi
     done
 
