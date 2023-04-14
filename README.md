@@ -2,7 +2,7 @@
 
 Examples of how to run the scripts. They make certain assumptions; I suggest you read the scripts to understand them, ensure they are met when installing the Operator. Helm is one recommended approach to packaging Operators and their custom resources (CRs) templates.
 
-## Sample CI/CD Jenkins Job
+## Sample CI/CD [Jenkins](Jenkinsfile) Job
 
 ```
 pipeline {
@@ -39,7 +39,7 @@ pipeline {
 
 Follow [this link](./Jenkinsfile) to view the complete `Jenkinsfile`.
 
-## Approve Operator InstallPlan
+## [Approve](manual-approve.sh) Operator InstallPlan
 
 ```sh
 # Set Environment Variables
@@ -50,7 +50,7 @@ OPERATOR_NAME=amq-operator-rhel8
 sh manual-approve.sh $NAMESPACE $OPERATOR_NAME
 ```
 
-## Uninstall Operator
+## [Cleanup](cleanup.sh) Operator
 
 ```sh
 # Set Environment Variables
