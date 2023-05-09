@@ -43,6 +43,12 @@ approve_installplan () {
     do
         sleep 15
         OPERATOR_INSTALLED="$( oc get clusterserviceversion.operators.coreos.com/$DESIRED_CSV -ojson | jq '.status.phase' | xargs )"
+        while [ -z "$OPERATOR_INSTALLED" ];
+        do
+            echo "CSV Phase Empty. Waiting..."
+            sleep 15
+            OPERATOR_INSTALLED="$( oc get clusterserviceversion.operators.coreos.com/$DESIRED_CSV -ojson | jq '.status.phase' | xargs )"
+        done
         echo "Awaiting Operator Installation to succeed..."
         echo "CSV PHASE: $OPERATOR_INSTALLED"
         if [ $OPERATOR_INSTALLED = "Succeeded" ];
