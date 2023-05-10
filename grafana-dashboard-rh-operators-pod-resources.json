@@ -46,11 +46,11 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1683649276416,
+  "iteration": 1683721048893,
   "links": [],
   "panels": [
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -58,7 +58,666 @@
         "x": 0,
         "y": 0
       },
-      "id": 10,
+      "id": 37,
+      "panels": [],
+      "title": "Broker AMQ",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 38,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.17",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(sum(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Total Cluster",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Usage / Namespace (millicore)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 8,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 47,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.17",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(sum(sum(kube_pod_container_resource_requests{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Total Cluster",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(sum(kube_pod_container_resource_requests{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Requests / Namespace (millicore)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 33,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.17",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(sum(sum(kube_pod_container_resource_limits{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Total Cluster",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(sum(kube_pod_container_resource_limits{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Limits / Namespace (millicore)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 41,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.17",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(sum(sum(container_memory_working_set_bytes{container != \"\"}) by (pod, namespace) and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total Cluster",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(sum(container_memory_working_set_bytes{container != \"\"}) by (pod, namespace) and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Memory Usage / Namespace",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 8,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 42,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.17",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(sum(kube_pod_container_resource_requests{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total Cluster",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(kube_pod_container_resource_requests{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Memory Requests / Namespace",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 16,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 35,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.17",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(sum(kube_pod_container_resource_limits{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total Cluster",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(kube_pod_container_resource_limits{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_subcomp =~ \"broker-amq\"}) by (namespace)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Memory Limits / Namespace",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 53,
       "panels": [
         {
           "aliasColors": {},
@@ -67,26 +726,28 @@
           "dashes": false,
           "datasource": null,
           "fieldConfig": {
-            "defaults": {},
+            "defaults": {
+              "unit": "short"
+            },
             "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 11,
-            "w": 24,
+            "h": 10,
+            "w": 8,
             "x": 0,
-            "y": 1
+            "y": 2
           },
           "hiddenSeries": false,
-          "id": 2,
+          "id": 54,
           "legend": {
             "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": false,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
             "total": false,
             "values": true
@@ -109,9 +770,18 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{namespace =~ \"$namespace\", pod !=\"\"}) by (pod, namespace)*1000 * on (pod) group_left(label_rht_subcomp_t, label_rht_comp) kube_pod_labels{label_rht_subcomp_t =~ \"application|infrastructure\", pod !=\"\"}",
+              "expr": "sum(sum(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace))",
+              "hide": false,
               "interval": "",
-              "legendFormat": "{{label_rht_comp}} / {{namespace}} -- {{ pod }}",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
               "refId": "A"
             }
           ],
@@ -119,7 +789,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Usage (millicores)",
+          "title": "CPU Usage / Namespace (millicore)",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -163,26 +833,242 @@
           "dashes": false,
           "datasource": null,
           "fieldConfig": {
-            "defaults": {},
+            "defaults": {
+              "unit": "short"
+            },
             "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 11,
-            "w": 24,
+            "h": 10,
+            "w": 8,
+            "x": 8,
+            "y": 2
+          },
+          "hiddenSeries": false,
+          "id": 55,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(kube_pod_container_resource_requests{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_requests{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Requests / Namespace (millicore)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 16,
+            "y": 2
+          },
+          "hiddenSeries": false,
+          "id": 48,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(kube_pod_container_resource_limits{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_limits{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Limits / Namespace (millicore)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
             "x": 0,
             "y": 12
           },
           "hiddenSeries": false,
-          "id": 7,
+          "id": 57,
           "legend": {
             "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": false,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
             "total": false,
             "values": true
@@ -205,9 +1091,19 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "kube_pod_container_resource_requests{resource=\"cpu\", namespace =~ \"$namespace\", pod !=\"\"}*1000 * on (pod) group_left(label_rht_subcomp_t, label_rht_comp) kube_pod_labels{label_rht_subcomp_t =~ \"application|infrastructure\", pod !=\"\"}",
+              "expr": "sum(sum(sum(container_memory_working_set_bytes{container != \"\"}) by (pod, namespace) and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
               "interval": "",
-              "legendFormat": "{{label_rht_comp}} / {{namespace}} -- {{ pod }}",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(container_memory_working_set_bytes{container != \"\"}) by (pod, namespace) and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
               "refId": "A"
             }
           ],
@@ -215,7 +1111,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Requests (millicores)",
+          "title": "Memory Usage / Namespace",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -231,7 +1127,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "decbytes",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -239,7 +1135,7 @@
               "show": true
             },
             {
-              "format": "short",
+              "format": "decbytes",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -259,26 +1155,28 @@
           "dashes": false,
           "datasource": null,
           "fieldConfig": {
-            "defaults": {},
+            "defaults": {
+              "unit": "decbytes"
+            },
             "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 11,
-            "w": 24,
-            "x": 0,
-            "y": 23
+            "h": 10,
+            "w": 8,
+            "x": 8,
+            "y": 12
           },
           "hiddenSeries": false,
-          "id": 6,
+          "id": 58,
           "legend": {
             "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": false,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
             "total": false,
             "values": true
@@ -301,9 +1199,19 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "kube_pod_container_resource_limits{resource=\"cpu\", namespace =~ \"$namespace\", pod !=\"\"}*1000 * on (pod) group_left(label_rht_subcomp_t, label_rht_comp) kube_pod_labels{label_rht_subcomp_t =~ \"application|infrastructure\", pod !=\"\"}",
+              "expr": "sum(sum(kube_pod_container_resource_requests{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
               "interval": "",
-              "legendFormat": "{{label_rht_comp}} / {{namespace}} -- {{ pod }}",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(kube_pod_container_resource_requests{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
               "refId": "A"
             }
           ],
@@ -311,7 +1219,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Limits (millicores)",
+          "title": "Memory Requests / Namespace",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -327,7 +1235,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "decbytes",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -335,7 +1243,115 @@
               "show": true
             },
             {
-              "format": "short",
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 16,
+            "y": 12
+          },
+          "hiddenSeries": false,
+          "id": 51,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_limits{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(kube_pod_container_resource_limits{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_comp =~ \"fuse.*console\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory Limits / Namespace",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "decbytes",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -349,7 +1365,7 @@
           }
         }
       ],
-      "title": "RHT Operators: CPU",
+      "title": "Fuse Console",
       "type": "row"
     },
     {
@@ -359,9 +1375,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 22
       },
-      "id": 12,
+      "id": 45,
       "panels": [
         {
           "aliasColors": {},
@@ -370,26 +1386,28 @@
           "dashes": false,
           "datasource": null,
           "fieldConfig": {
-            "defaults": {},
+            "defaults": {
+              "unit": "short"
+            },
             "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 12,
-            "w": 24,
+            "h": 10,
+            "w": 8,
             "x": 0,
-            "y": 2
+            "y": 3
           },
           "hiddenSeries": false,
-          "id": 3,
+          "id": 46,
           "legend": {
             "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": false,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
             "total": false,
             "values": true
@@ -412,9 +1430,18 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(container_memory_working_set_bytes{container!=\"\", namespace =~ \"$namespace\", pod !=\"\"}) by (pod, namespace) * on (pod) group_left(label_rht_subcomp_t, label_rht_comp) kube_pod_labels{label_rht_subcomp_t =~ \"application|infrastructure\", pod !=\"\"}",
+              "expr": "sum(sum(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace))",
+              "hide": false,
               "interval": "",
-              "legendFormat": "{{label_rht_comp}} / {{namespace}} -- {{ pod }}",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
               "refId": "A"
             }
           ],
@@ -422,7 +1449,329 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Usage",
+          "title": "CPU Usage / Namespace (millicore)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 8,
+            "y": 3
+          },
+          "hiddenSeries": false,
+          "id": 39,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(kube_pod_container_resource_requests{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_requests{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Requests / Namespace (millicore)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 16,
+            "y": 3
+          },
+          "hiddenSeries": false,
+          "id": 56,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(kube_pod_container_resource_limits{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_limits{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Limits / Namespace (millicore)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 0,
+            "y": 13
+          },
+          "hiddenSeries": false,
+          "id": 49,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(container_memory_working_set_bytes{container != \"\"}) by (pod, namespace) and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(container_memory_working_set_bytes{container != \"\"}) by (pod, namespace) and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory Usage / Namespace",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -466,26 +1815,28 @@
           "dashes": false,
           "datasource": null,
           "fieldConfig": {
-            "defaults": {},
+            "defaults": {
+              "unit": "decbytes"
+            },
             "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 14
+            "h": 10,
+            "w": 8,
+            "x": 8,
+            "y": 13
           },
           "hiddenSeries": false,
-          "id": 8,
+          "id": 50,
           "legend": {
             "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": false,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
             "total": false,
             "values": true
@@ -508,9 +1859,19 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "kube_pod_container_resource_requests{resource=\"memory\", namespace =~ \"$namespace\", pod !=\"\"} * on (pod) group_left(label_rht_subcomp_t, label_rht_comp) kube_pod_labels{label_rht_subcomp_t =~ \"application|infrastructure\", pod !=\"\"}",
+              "expr": "sum(sum(kube_pod_container_resource_requests{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
               "interval": "",
-              "legendFormat": "{{label_rht_comp}} / {{namespace}} -- {{ pod }}",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(kube_pod_container_resource_requests{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
               "refId": "A"
             }
           ],
@@ -518,7 +1879,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Requests",
+          "title": "Memory Requests / Namespace",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -562,26 +1923,28 @@
           "dashes": false,
           "datasource": null,
           "fieldConfig": {
-            "defaults": {},
+            "defaults": {
+              "unit": "decbytes"
+            },
             "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 26
+            "h": 10,
+            "w": 8,
+            "x": 16,
+            "y": 13
           },
           "hiddenSeries": false,
-          "id": 4,
+          "id": 59,
           "legend": {
             "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": false,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
             "total": false,
             "values": true
@@ -604,9 +1967,19 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "kube_pod_container_resource_limits{resource=\"memory\", namespace =~ \"$namespace\", pod !=\"\"} * on (pod) group_left(label_rht_subcomp_t, label_rht_comp) kube_pod_labels{label_rht_subcomp_t =~ \"application|infrastructure\", pod !=\"\"}",
+              "expr": "sum(sum(kube_pod_container_resource_limits{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
               "interval": "",
-              "legendFormat": "{{label_rht_comp}} / {{namespace}} -- {{ pod }}",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(kube_pod_container_resource_limits{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_rht_comp =~ \"PAM\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
               "refId": "A"
             }
           ],
@@ -614,7 +1987,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": " Limits",
+          "title": "Memory Limits / Namespace",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -652,7 +2025,667 @@
           }
         }
       ],
-      "title": "RHT Operators: MEMORY",
+      "title": "PAM - BPM",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 25,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 0,
+            "y": 4
+          },
+          "hiddenSeries": false,
+          "id": 27,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Usage / Namespace (millicore)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 8,
+            "y": 4
+          },
+          "hiddenSeries": false,
+          "id": 32,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(kube_pod_container_resource_requests{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_requests{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Requests / Namespace (millicore)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 16,
+            "y": 4
+          },
+          "hiddenSeries": false,
+          "id": 40,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(kube_pod_container_resource_limits{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_limits{resource=\"cpu\"}) by (pod, namespace)*1000 and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Limits / Namespace (millicore)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 0,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 31,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(sum(container_memory_working_set_bytes{container != \"\"}) by (pod, namespace) and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(sum(container_memory_working_set_bytes{container != \"\"}) by (pod, namespace) and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory Usage / Namespace",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 8,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 34,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_requests{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(kube_pod_container_resource_requests{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory Requests / Namespace",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 8,
+            "x": 16,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 43,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(sum(kube_pod_container_resource_limits{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace))",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Total Cluster",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(kube_pod_container_resource_limits{resource = \"memory\", container != \"\"} and on (pod) kube_pod_labels{label_com_redhat_component_name =~ \"Data_Grid.*\"}) by (namespace)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{namespace}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory Limits / Namespace",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Data Grid",
       "type": "row"
     }
   ],
@@ -691,12 +2724,12 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ret Hat Operators",
   "uid": "PfqAOWUVz",
-  "version": 7
+  "version": 13
 }
