@@ -62,3 +62,7 @@ CHART_NAMES="amq-operator,amq-broker"
 # Run Script
 sh cleanup.sh $NAMESPACE $OPERATOR_NAME $STARTING_CSV "$CHART_NAMES"
 ```
+
+## [Red Hat Operators Grafana Dashboard](./grafana-dashboard-rh-operators-pod-resources.json)
+
+![rht-operators-grafana](assets/rht-operators-grafana.png)
