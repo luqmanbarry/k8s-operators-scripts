@@ -63,7 +63,7 @@ CHART_NAMES="amq-operator,amq-broker"
 sh cleanup.sh $NAMESPACE $OPERATOR_NAME $STARTING_CSV "$CHART_NAMES"
 ```
 
-## [Red Hat Operators Grafana Dashboard](./grafana-dashboard-rh-operators-pod-resources.json)
+## [Red Hat Operators Grafana Dashboard](./rht-middleware-monitoring/)
 
 Currently the dashboard looks for pods with following tags:
 
