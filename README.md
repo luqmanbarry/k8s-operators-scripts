@@ -92,7 +92,7 @@ To monitor more Operators not already on this dashboard, follow these steps:
    
    In the prometheus query results, tags are displayed a  bit differently with `label_` prepended, dots (`.`) and hyphens (`-`) replaced by underscore (`_`).
 2. Duplicate the Grafana Panels and Rows as needed
-3. Refine the `kube_pod_labels{namespace=~"my-namespace"}` query until satisfied with output. Loot at the dashboard for an example.
+3. Refine the `kube_pod_labels{namespace=~"my-namespace"}` query until satisfied with output. Look at the dashboard for an example.
 4. Save your changes
 
 
