@@ -65,4 +65,20 @@ sh cleanup.sh $NAMESPACE $OPERATOR_NAME $STARTING_CSV "$CHART_NAMES"
 
 ## [Red Hat Operators Grafana Dashboard](./grafana-dashboard-rh-operators-pod-resources.json)
 
+Currently the dashboard looks for pods with following tags:
+
+- AMQ Operator: `rht.subcomp=broker-amq`
+
+- JBoss EAP Operator: `rht.comp=EAP`
+
+- PAM/BPM Operator: `rht.comp=PAM`
+
+- Data Grid Operator: `com.redhat.component.name=Data_Grid`
+
+- Fuse Console Operator: `rht.comp="fuse console"`
+
+Usually Operators come with default tags. However, Red Hat products deployed as templates objects may require tags be added manually. 
+
+For example, apps deployed with JBoss EAP 7.x as base image will not have these tags by default but we can add the `rht.comp=EAP` tag for the dashboard to discover them. to You can fetch pod tags with this prometheus query `kube_pod_labels{namespace=~"my-namespace"}`
+
 ![rht-operators-grafana](assets/rht-operators-grafana.png)
