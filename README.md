@@ -79,6 +79,18 @@ Currently the dashboard looks for pods with following tags:
 
 Usually Operators come with default tags. However, Red Hat products deployed as templates objects may require tags be added manually. 
 
-For example, apps deployed with JBoss EAP 7.x as base image will not have these tags by default but we can add the `rht.comp=EAP` tag for the dashboard to discover them. to You can fetch pod tags with this prometheus query `kube_pod_labels{namespace=~"my-namespace"}`
+For example, apps deployed with JBoss EAP 7.x as base image will not have these tags by default but we can add the `rht.comp=EAP` tag for the dashboard to discover them. to You can fetch pod tags with this prometheus query `kube_pod_labels{namespace=~"my-namespace"}`.
 
 ![rht-operators-grafana](assets/rht-operators-grafana.png)
+
+
+To monitor more Operators not already on this dashboard, follow these steps:
+
+1. Ensure target pods have the necessary tags, add them if missing.
+   
+   In the prometheus query results, tags are displayed a  bit differently with `label_` prepended, dots (`.`) and hyphens (`-`) replaced by underscore (`_`).
+2. Duplicate the Grafana Panels and Rows as needed
+3. Refine the `kube_pod_labels{namespace=~"my-namespace"}` query until satisfied with output. Loot at the dashboard for an example.
+4. Save your changes
+
+
