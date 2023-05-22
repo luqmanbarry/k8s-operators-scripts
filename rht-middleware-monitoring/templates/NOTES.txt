@@ -1,0 +1,15 @@
+
+# Red Hat Middleware Monitoring
+
+A Helm chart for installing the Grafana Operator CRs used for gathering Red Hat middleware pods resources consumption metrics.
+
+The following resources will be deployed:
+
+- GrafanaDashboard
+  - rht-middlewares
+
+- GrafanaDataSource:
+
+  {{- range $promDataSource := .Values.grafanaDataSources.prometheus }}
+    - {{ $promDataSource.name | lower }}
+  {{- end }}

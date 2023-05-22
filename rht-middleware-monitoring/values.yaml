@@ -1,0 +1,14 @@
+
+
+grafanaDataSources:
+  datasourceFilterLabel: "Cluster"
+  datasourceNameFilterRegex: "/^<cluster_prefix>-.*/"
+  prometheus:
+    - name: "cluster1"
+      auth:
+        bearerToken: "YOUR_SA_TOKEN"
+        url: 'https://thanos-querier-openshift-monitoring.<cluster1_domain>.com'
+     - name: "cluster2"
+      auth:
+        bearerToken: "YOUR_SA_TOKEN"
+        url: 'https://thanos-querier-openshift-monitoring.<cluster2_domain>.com'

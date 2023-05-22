@@ -83,6 +83,8 @@ For example, apps deployed with JBoss EAP 7.x as base image will not have these 
 
 ![rht-operators-grafana](assets/rht-operators-grafana.png)
 
+The Helm chart used for the deployment of the the datasources and dashboard is available [here](./rht-middleware-monitoring/).
+
 
 To monitor more Operators not already on this dashboard, follow these steps:
 
