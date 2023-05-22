@@ -83,7 +83,7 @@ For example, apps deployed with JBoss EAP 7.x as base image will not have these 
 
 ![rht-operators-grafana](assets/rht-operators-grafana.png)
 
-The Helm chart used for the deployment of the the datasources and dashboard is available [here](./rht-middleware-monitoring/). Use the `values.yaml` file to add datasources as needed. As more datasources are being added, use the [test-datasource.sh](./rht-middleware-monitoring/test-datasource.sh) script to validate the `bearerToken, ur` values.
+The Helm chart used for the deployment of the the datasources and dashboard is available [here](./rht-middleware-monitoring/). Use the [values.yaml](./rht-middleware-monitoring/values.yaml) file to add datasources as needed. As more datasources are being added, use the [test-datasource.sh](./rht-middleware-monitoring/test-datasource.sh) script to validate the `bearerToken, ur` values. The chart is using Grafana Operator v4.10.x custom resources (CRs).
 
 
 To monitor more Operators not already on this dashboard, follow these steps:
